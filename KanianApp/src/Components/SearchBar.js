@@ -21,14 +21,14 @@ export default function SearchBar(props) {
   return (
     <View style={[styles.container, props.containerStyle]}>
       <View style={styles.iconView}>
-        <Icon name="search1" size={24} color={colors.secondary}></Icon>
+        <Icon name="search1" size={24} color={colors.primary}></Icon>
       </View>
       {!disabled ? (
         <TextInput
           autoFocus={true}
-          placeholder={'Search'}
+          placeholder={'Search..'}
           placeholderTextColor={colors.grey}
-          style={{ ...styles.textInput }}
+          style={{ ...styles.textInput, ...props.textInput}}
           {...props}
         />
       ) : (
@@ -42,7 +42,7 @@ export default function SearchBar(props) {
               {/* <View style={styles.iconView}>
                 <Icon name="search1" size={24} color={colors.secondary}></Icon>
               </View> */}
-              <Text style={{ color: colors.grey, fontSize: 16 }}>Search</Text>
+              <Text style={{ color: colors.grey, fontSize: 16 }}>What do you want to eat?</Text>
             </View>
           </TouchableWithoutFeedback>
         )}

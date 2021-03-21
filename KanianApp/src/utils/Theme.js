@@ -1,8 +1,8 @@
 import {Dimensions, Platform} from 'react-native';
 
 export const colors = {
-  primary: '#fff',
-  secondary: '#101010',
+  primary: '#e9961e',
+  secondary: '#1d1914',
   background: '#f2f6ff',
   button: '#ff5016',
   darkBackground: '#1d1d1d',

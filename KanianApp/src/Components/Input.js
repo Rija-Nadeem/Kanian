@@ -141,13 +141,13 @@ const styles = StyleSheet.create({
     height: 45,
     backgroundColor: 'white',
     borderRadius: 10,
+    color: colors.secondary
   },
   label: {
     color: colors.secondary,
     marginVertical: 10,
     fontWeight: 'bold',
     fontSize: 16,
-    fontFamily:fonts.primary
   },
   errorField: {
     borderColor: colors.secondary,

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, FlatList, TouchableWithoutFeedback} from 'react-native';
-// import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
+import {View, Text, StyleSheet, FlatList, ScrollView, Image} from 'react-native';
+import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 import {
   FoodCard,
   FoodIcon,
@@ -15,6 +15,7 @@ export default class Category extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      image:''
     };
   }
 
@@ -22,22 +23,22 @@ export default class Category extends Component {
       const {item,index,onPress,selected} = this.props;
     return (
         <TouchableWithoutFeedback
-          onPress={() => onPress(item)}>
-          <View style={[styles.category,
-            {backgroundColor: selected ? colors.primary: 'transparent'}
-          ]}>
-            <View style={[styles.dot,{display:selected?'flex':'none'}]}></View>
-            <Text
-              style={[
-                styles.categoryText,
-                {
-                  // color:selected ? colors.secondary: colors.grey,
-                  fontFamily:selected ? fonts.primaryBold:fonts.primary,
-                  fontWeight:selected? 'bold':'normal',
-                },
-              ]}>
-              {item.name}
-            </Text>
+          onPress={onPress}>
+          <View style={styles.category}>
+            <View style={[styles.catImg,
+            {
+              backgroundColor:
+                selected ? colors.secondary: 'white'
+            },
+            ]}>
+              <Image source={item.image} style={styles.image} />
+            </View>
+            <Text style={[
+              styles.catText,
+              {
+                  fontWeight:selected ? 'bold':'normal',
+              },
+              ]}>{item.name}</Text>
           </View>
         </TouchableWithoutFeedback>
       );
@@ -46,32 +47,54 @@ export default class Category extends Component {
 
 const styles = StyleSheet.create({
     category: {
-      flexDirection:'row',
+      // width:125,
+      // padding:10,
+      // backgroundColor:'red',
+      display:'flex',
+      flexDirection:'column',
       justifyContent:'center',
       alignItems:'center',
-      // backgroundColor:colors.primary,
-      borderRadius:20,
-      paddingHorizontal:20,
-      marginRight:metrics.smallMargin,
 
       
+    },
+    catImg:{
+      backgroundColor:colors.secondary,
+      padding:10,
+      borderRadius:20,
+      marginHorizontal:10,
+      shadowColor: "#000",
+      shadowOffset: {
+        width: 0,
+        height: 1,
+      },
+      shadowOpacity: 0.22,
+      shadowRadius: 2.22,
+
+      elevation: 3,
+    },
+    image:{
+      width:50,
+      height:40,
+      resizeMode:'contain'
+    },
+    catText:{
+      // fontFamily: fonts.primary,
+      fontSize: 12,
+      marginVertical:10,
+      color:colors.secondary
     },
     categoryText: {
       fontFamily: fonts.primary,
       fontSize: 14,
       textAlign: 'center',
-      // width:'20%',
-      paddingHorizontal:5,
-      marginVertical:10,
-      color:colors.secondary,
-      textTransform: 'capitalize'
+      width:'100%',
+      marginVertical:10
     },
     dot: {
       width: 8,
       height: 8,
       borderRadius: 5,
-      marginTop:2,
-      backgroundColor:'red',
+      marginTop:5
     },
   });
   

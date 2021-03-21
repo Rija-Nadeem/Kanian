@@ -13,11 +13,7 @@ export default class CartItem extends Component {
   render() {
     const {name, image, price, bgcolor, description} = this.props.item;
     return (
-      <LinearGradient 
-        colors={[colors.background, 'white' ]}
-        locations={[0, 0.6]}
-        start={{ x: 0.5, y: 0 }}
-        end={{ x: 0.5, y: 1 }}
+      <View 
         style={[styles.container,]}>
         <View style={{flexDirection: 'row', alignItems: 'center', flex: 1, paddingLeft:10}}>
           <Image
@@ -29,23 +25,29 @@ export default class CartItem extends Component {
             <Text style={styles.desc} numberOfLines={1} ellipsizeMode="tail">
               {description}
             </Text>
-            <Text style={styles.price}>${price}</Text>
+            <View style={{flexDirection:'row', justifyContent:'space-between',marginBottom: 5,}}>
+                  <View style={{ marginTop: 10, flexDirection:'row'}}>
+                    <Text style={{fontSize:12,paddingRight:2}} >Pp</Text>
+                    <Text style={styles.price}>{price}.000</Text>
+                  </View>
+                <View style={styles.quantityView}>
+                  <Icon
+                    name="plus-circle"
+                    style={styles.icon}
+                    color='black'
+                    onPress={this.props.onAdd}
+                  />
+                  <Text style={styles.quantity}>{this.props.quantity}</Text>
+                  <Icon
+                    name="minus-circle"
+                    style={styles.icon}
+                    onPress={this.props.onMinus}
+                  />
+                </View>
+              </View>
           </View>
         </View>
-        <View style={styles.quantityView}>
-          <Icon
-            name="plus-box"
-            style={styles.icon}
-            onPress={this.props.onAdd}
-          />
-          <Text style={styles.quantity}>{this.props.quantity}</Text>
-          <Icon
-            name="minus-box"
-            style={styles.icon}
-            onPress={this.props.onMinus}
-          />
-        </View>
-      </LinearGradient>
+      </View>
     );
   }
 }
@@ -55,27 +57,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: metrics.defaultMargin,
-    // shadowColor: '#000',
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 2,
-    // },
-    // shadowOpacity: 0.25,
-    // shadowRadius: 3.84,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 5,
-    },
-    shadowOpacity: 0.36,
-    shadowRadius: 6.68,
-
-    elevation: 11,
+    margin: metrics.defaultMargin,
+    marginBottom: metrics.smallMargin,
+    marginTop:0,
     borderRadius: 20,
     overflow: 'hidden',
-    backgroundColor:'white',
-    margin: metrics.defaultMargin,
+    backgroundColor:colors.primary,
 
   },
   image: {
@@ -83,37 +70,40 @@ const styles = StyleSheet.create({
     height: 80,
     borderRadius:20,
     marginRight: 20,
-    resizeMode: 'contain',
+    resizeMode: 'cover',
   },
   title: {
-    fontFamily: fonts.primaryBold,
     fontSize: 18,
-    color:colors.secondary,
+    marginTop:10,
+    color:'white',
+    fontWeight:'bold'
   },
   desc:{
-    color: colors.grey,
+    color: colors.secondary,
     marginVertical: 5,
-    fontFamily: fonts.secondary,
   },
   price: {
     fontFamily: fonts.primaryBold,
     fontSize: 18,
-    marginBottom: 5,
+    
   },
   quantityView: {
     backgroundColor: colors.lightBackground,
     padding: 5,
-    borderRadius: 10,
+    borderRadius: 20,
     marginRight: 10,
     marginVertical: 5,
+    flexDirection:'row',
+    justifyContent:'center',
+    alignItems:'center'
   },
   quantity: {
     alignSelf: 'center',
-    marginVertical: 5,
-    fontFamily: fonts.primaryBold,
+    marginHorizontal: 8,
+    fontWeight:'bold'
   },
   icon: {
     fontSize: 24,
-    color: colors.secondary,
+    color: colors.primary,
   },
 });

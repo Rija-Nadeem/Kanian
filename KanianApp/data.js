@@ -51,7 +51,8 @@ export default {
             "name": "Smash Burgers",
             "image": require('./assets/images/b2.png'),
             "description": "Smash Burgers are destined to be your favorite burgers! Crispy edges and a juicy middle,housed between two potato buns that soak up the juice, this is the ultimate bite!",
-            "price": "45"
+            "price": "45",
+            recommended:true,
         },
         {
             "id": "3",
@@ -99,7 +100,8 @@ export default {
             "name": "Chicken Tikka",
             "image": require('./assets/images/p8.png'),
             "description": "Traditional Tikka flavored chunks perfectly set with American style hand tossed crust to bring the best of both worlds.",
-            "price": "40"
+            "price": "40",
+            recommended:true,
         },
         {
             "id": "9",
@@ -171,7 +173,8 @@ export default {
             "name": "Incantare Caesar Chicken Steak",
             "image": require('./assets/images/s17.png'),
             "description": "Spicy. Char grilled, sauced mushroom, olive & jalapeno pepper with spicy caesar sauce. Served with chef's veggie & choice of potatoes.",
-            "price": "60"
+            "price": "60",
+            recommended:true,
         },
         {
             "id": "18",
@@ -227,7 +230,8 @@ export default {
             "name": "Parmesan Chicken Pasta",
             "image": require('./assets/images/p24.png'),
             "description": "Golden Fried chicken bread over penne pasta tossed in parmesan cream sauce & topped with marinara & cheese. Served with garlic bread.",
-            "price": "50"
+            "price": "50",
+            recommended:true,
         },
         {
             "id": "25",
@@ -307,7 +311,8 @@ export default {
             "name": "The Smoke Salmon Club",
             "image": require('./assets/images/c34.jpg'),
             "description": "Norwegian Smoked Salmon Club Sandwich with Hard Boiled Egg, Cucumbers and a Lemon Infused Homemade Mayo served with Fries & Green Salad",
-            "price": "55"
+            "price": "55",
+            recommended:true,
         },
         {
             "id": "35",

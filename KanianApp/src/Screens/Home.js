@@ -59,66 +59,73 @@ class Home extends Component {
   render() {
     console.log('margins', )
     return (
-      <Wrapper>
+      <Wrapper showTopDrop={true} >
+        
         <ScrollView
-          style={{ flex: 1 }}
+          style={{ flex: 1}}
           bounces={false}
           showsVerticalScrollIndicator={false}>
-          <SearchBar disabled 
-          // iconView={{ right: 6}} containerStyle={{backgroundColor: 'transparent'}}
-          />
-          <View style={styles.headingContainer}>
-            <Text style={styles.heading}>
-              <Text style={{ fontFamily: fonts.primaryBold, fontWeight:'bold' }}>Fresh Healthy</Text>{' '}
-              Delicious Sushi
-            </Text>
-            <Icon
-              onPress={() => Navigator.navigate('Order')}
-              name="cart"
-              style={styles.icon}
-            />
-          </View>
+         {/* <Wrapper>
 
-          <View style={{ marginTop: 10 }}>
+         </Wrapper> */}
+         <View>
+         <View style={styles.backview}></View> 
+         <View style={{marginTop:-210}}>
+
+            <View style={styles.headingContainer}>
+              <Text style={styles.heading}>
+                <Text style={{ fontFamily: fonts.primaryBold, fontWeight:'bold' }}>KANIAN</Text>{'\n'}
+               <Text style={{fontSize:14}}>Burger And Food App</Text> 
+              </Text>
+              <Icon
+                onPress={() => Navigator.navigate('Order')}
+                name="cart"
+                style={styles.icon}
+              />
+            </View>
+            <SearchBar disabled 
+            // iconView={{ right: 6}} containerStyle={{backgroundColor: 'transparent'}}
+            />
+
+            <View style={{ marginTop: 10 }}>
+              <HorizontalList
+                data={data.category}
+                renderItem={({ item }) => (
+                  <Category
+                    item={item}
+                    selected={item.id == this.state.selectedCategory}
+                    onPress={() => this.selectCategory(item)}
+                  />
+                )}
+              />
+            </View>
+
             <HorizontalList
-              data={data.category}
+              // horizontal={false}
+              // numColumns={2}
+              data={this.state.items}
               renderItem={({ item }) => (
-                <>
-                {console.log('item cat', item)}
-                <Category
-                  item={item}
-                  selected={item.id == this.state.selectedCategory}
-                  onPress={(item) => this.selectCategory(item)}
-                />
-                </>
+                <FoodCard item={item} />
               )}
             />
-          </View>
 
-          <HorizontalList
-            horizontal={false}
-            numColumns={2}
-            data={this.state.items}
-            renderItem={({ item }) => (
-              <FoodCard item={item} />
+
+            <Text style={styles.subHeading}>Recommended</Text>
+            <HorizontalList
+              data={this.state.recommended}
+              renderItem={({ item }) => <ItemCard item={item} />}
+            />
+            {this.props.favProducts.length > 0 && (
+              <>
+                <Text style={styles.subHeading}>Favourites</Text>
+                <HorizontalList
+                  data={this.props.favProducts}
+                  renderItem={({ item }) => <ItemCard item={item} />}
+                />
+              </>
             )}
-          />
-
-
-          <Text style={styles.subHeading}>Recommended</Text>
-          <HorizontalList
-            data={this.state.recommended}
-            renderItem={({ item }) => <ItemCard item={item} />}
-          />
-          {this.props.favProducts.length > 0 && (
-            <>
-              <Text style={styles.subHeading}>Favourites</Text>
-              <HorizontalList
-                data={this.props.favProducts}
-                renderItem={({ item }) => <ItemCard item={item} />}
-              />
-            </>
-          )}
+          </View>
+         </View>
         </ScrollView>
       </Wrapper>
     );
@@ -129,10 +136,12 @@ const styles = StyleSheet.create({
   headingContainer:{
     display:'flex',
     flexDirection:'row',
-    justifyContent:'center',
+    justifyContent:'space-between',
     alignItems:'center',
-    margin: metrics.defaultMargin,
-    marginVertical:0,
+    // margin: metrics.defaultMargin,
+    // marginBottom:0,
+    // marginVertical:0,
+    // flex:1,
     // borderColor:'red',
     // borderWidth:1
   },
@@ -141,11 +150,14 @@ const styles = StyleSheet.create({
     fontSize: 26,
     margin: metrics.defaultMargin,
     marginRight: metrics.width * 0.35,
+    color:'white',
   },
   subHeading: {
     fontFamily: fonts.primaryBold,
     fontSize: 24,
     margin: metrics.defaultMargin,
+    fontWeight:'bold',
+    color:colors.secondary
   },
   category: {
     transform: [{ rotate: '270deg' }],
@@ -174,8 +186,18 @@ const styles = StyleSheet.create({
     right: metrics.defaultMargin,
     // top: metrics.defaultMargin,
     fontSize: 32,
-    color: colors.secondary,
+    color: 'white',
   },
+  backview:{
+    backgroundColor:colors.primary,
+    width: metrics.width,
+    height:210,
+    position:'relative',
+    top:0,
+    left:0,
+    borderBottomRightRadius:35,
+    borderBottomLeftRadius:35,
+  }
 });
 
 const mapStateToProps = (state) => {

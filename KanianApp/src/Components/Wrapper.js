@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {View, StatusBar} from 'react-native';
-import {colors} from '../utils/Theme';
+import {View, StatusBar, StyleSheet} from 'react-native';
+import {colors, metrics} from '../utils/Theme';
 import {
   SafeAreaView,
   SafeAreaInsetsContext,
@@ -8,13 +8,14 @@ import {
 
 class Wrapper extends Component {
   render() {
-    const {top, bottom} = this.props;
+    const {top, bottom, showTopDrop} = this.props;
     return (
-      <View style={{flex: 1, backgroundColor: colors.primary}}>
+      <View style={{flex: 1, backgroundColor: colors.background}}>
         <StatusBar
-          backgroundColor={colors.background}
+          backgroundColor={ showTopDrop? colors.primary: colors.background}
           barStyle="dark-content"
         />
+       
         <SafeAreaInsetsContext.Consumer>
           {(insets) => (
             <View
@@ -22,10 +23,12 @@ class Wrapper extends Component {
                 flex: 1,
                 marginTop: top == 0 ? top : insets.top,
                 paddingBottom: bottom == 0 ? bottom : insets.bottom,
-                backgroundColor: colors.background,
                 ...this.props.style,
               }}>
+                <>
+                
               {this.props.children}
+              </>
             </View>
           )}
         </SafeAreaInsetsContext.Consumer>
@@ -33,5 +36,17 @@ class Wrapper extends Component {
     );
   }
 }
+const styles = StyleSheet.create({
+  backview:{
+    backgroundColor:colors.primary,
+    width: metrics.width,
+    height:'29%',
+    position:'relative',
+    top:0,
+    left:0,
+    borderBottomRightRadius:35,
+    borderBottomLeftRadius:35,
+  }
+})
 
 export default Wrapper;

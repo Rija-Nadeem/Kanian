@@ -27,21 +27,20 @@ export default class ItemCard extends Component {
             category: this.props.item.categoryid,
           })
         }>
-            <LinearGradient 
-              colors={[colors.background, 'white' ]}
-              locations={[0, 0.6]}
-              start={{ x: 0.5, y: 0 }}
-              end={{ x: 0.5, y: 1 }}
-              style={[styles.container,{backgroundColor:bgcolor,...this.props.style}]}>
+            <View 
+              style={[styles.container,{...this.props.style}]}>
                 <Image source={image} style={styles.image} />
                 <View style={{flex: 1}}>
-                  <Text style={styles.title}>{name}</Text>
-                  <Text style={styles.price}>${price}</Text>
+                  <Text numberOfLines={1} ellipsizeMode="tail" style={styles.title}>{name}</Text>
+                  <View style={{ marginTop: 10, flexDirection:'row'}}>
+                    <Text style={{fontSize:12,paddingRight:2}} >Pp</Text>
+                    <Text style={styles.price}>{price}.000</Text>
+                  </View>
                 </View>
                 <View style={styles.iconView}>
                   <Icon name="plus" color="white" size={24} />
                 </View>
-            </LinearGradient>
+            </View>
       </TouchableWithoutFeedback>
     );
   }
@@ -52,23 +51,7 @@ const styles = StyleSheet.create({
     width: metrics.width / 1.3,
     flexDirection: 'row',
     alignItems: 'flex-end',
-    backgroundColor: 'white',
-    // shadowColor: colors.grey,
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 2,
-    // },
-    // shadowOpacity: 0.25,
-    // shadowRadius: 3.84,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 5,
-    },
-    shadowOpacity: 0.36,
-    shadowRadius: 6.68,
-
-    elevation: 11,
+    backgroundColor: colors.primary,
     padding: 15,
     marginRight: 20,
     borderRadius: 20,
@@ -78,7 +61,7 @@ const styles = StyleSheet.create({
     height: 70,
     borderRadius: 20,
     marginRight: 20,
-    resizeMode:'contain'
+    resizeMode:'cover'
   },
 
   iconView: {
@@ -103,9 +86,10 @@ const styles = StyleSheet.create({
   title: {
     fontWeight: 'bold',
     fontSize: 16,
+    color:'white'
   },
   price: {
-    marginTop: 10,
+   
     fontSize: 20,
     fontWeight: 'bold',
   },

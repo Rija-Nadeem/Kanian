@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Modal, Text, View, StyleSheet} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Navigator from '../utils/Navigator';
 import {colors, fonts, metrics} from '../utils/Theme';
 
@@ -14,12 +14,13 @@ export default class OrderPlaced extends Component {
         <View style={styles.modalView}>
           <View style={styles.centeredView}>
             <View style={styles.iconView}>
-              <Icon name="check" color={'white'} size={54} />
+              <Icon name="check-decagram" style={styles.icon} color={colors.primary} size={120} />
             </View>
             <Text style={styles.title}>
-              Your order has been placed. You will receive a confirmation call
-              shortly!
+              Order Confirmed!
             </Text>
+            <Text style={{fontSize:18, textAlign:'center', marginBottom:10}} >We will get back to you with your order
+              shortly</Text>
             <View style={{borderRadius: 10, overflow: 'hidden',marginVertical:10}}>
               <Text onPress={this.props.onPress} style={styles.button}>Ok</Text>
             </View>
@@ -51,29 +52,36 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   iconView: {
-    backgroundColor: colors.secondary,
-    width: 100,
-    height: 100,
+    backgroundColor: 'transparent',
+    width: 120,
+    height: 120,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 20,
     alignSelf: 'center',
-    marginVertical: 20,
+    // marginVertical: 20,
   },
+  // icon:{
+  //   width: 100,
+  //   height: 100,
+  // },
   title: {
     fontSize: 22,
     fontFamily: fonts.primaryBold,
     textAlign: 'center',
-    marginVertical: 20,
-    lineHeight: 32,
+    marginTop: 20,
+    marginBottom:10,
+    // lineHeight: 32,
+    fontWeight:'bold'
   },
   button: {
-    backgroundColor: colors.secondary,
-    color: 'white',
+    backgroundColor: colors.primary,
+    color: colors.secondary,
     padding: 10,
-    borderRadius: 10,
+    borderRadius: 20,
     textAlign: 'center',
-    fontSize: 18,
+    fontSize: 20,
     fontFamily: fonts.secondaryBold,
+    fontWeight:'bold'
   },
 });

@@ -4,8 +4,6 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Navigator from '../utils/Navigator';
 import {colors, fonts, metrics} from '../utils/Theme';
 import Fav from './Fav';
-// import ImageView from './ImageView';
-import LinearGradient from 'react-native-linear-gradient';
 
 export default class FoodCard extends Component {
   constructor(props) {
@@ -13,38 +11,50 @@ export default class FoodCard extends Component {
     this.state = {};
   }
 
+  // printFirstName=(name)=>{
+  //   s = name.split(/(?<=^\S+)\s/)
+  //   return s[0];
+  // }
+  // printSecondName=(name)=>{
+  //   s = name.split(/(?<=^\S+)\s/)
+  //   return s[1] ? s[1] : '';
+  // }
+
   render() {
     const {name, image, description, price,bgcolor,isFav} = this.props.item;
     return (
       <TouchableOpacity
         activeOpacity={0.9}
         onPress={() => Navigator.navigate('ProductDetail',{item:this.props.item,category:this.props.category})}>
-        <View style={styles.container}>
-          <LinearGradient
-           colors={[colors.background, 'white' ]}
-           locations={[0, 0.8]}
-           start={{ x: 0, y: 0 }}
-           end={{ x: 1, y: 1 }}
-           style={styles.linearGrad}
-          >
-            <View style={styles.imageView}>
-              <Image source={image} style={styles.image} />
+        <View style={[styles.container,{backgroundColor:colors.primary}]}>
+          <View style={styles.titleContainer} >
+            <Text style={styles.title} numberOfLines={2} ellipsizeMode="tail">
+              {name.substr(0,name.indexOf(' '))}{'\n'}{name.substr(name.indexOf(' ')+1)}
+              </Text>
+          </View>
+          <View style={styles.imageView}>
+            <Image source={image} style={styles.image} />
+          </View>
+          <Fav isFav={isFav} item={this.props.item}/>
+          
+          <View style={styles.detailView}>
+            
+            {/* <Text style={styles.desc} numberOfLines={1} ellipsizeMode="tail">
+              {description}
+            </Text> */}
+            <View style={{flexDirection:'row',}} >
+              <View style={{paddingRight:2}}>
+                <Text style={{fontSize: 12 }}>Pp</Text> 
+              </View>
+              <Text style={styles.price}>
+                {price.replace('$', '')}.000
+              </Text>
             </View>
             
-            <View style={styles.detailView}>
-              <Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">{name}</Text>
-              <Text style={styles.desc} numberOfLines={1} ellipsizeMode="tail">
-                {description}
-              </Text>
-              <Text style={styles.price}>
-                ${price.replace('$', '')}
-              </Text>
-              <View style={styles.iconView}>
-                <Fav style={{top:-4}} isFav={isFav} item={this.props.item}/>
-              </View>
-
+            <View style={styles.iconView}>
+              <Icon name="plus" color="white" size={24} />
             </View>
-          </LinearGradient>
+          </View>
         </View>
       </TouchableOpacity>
     );
@@ -53,57 +63,36 @@ export default class FoodCard extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    width: 175,
+    width: 230,
     marginRight: metrics.defaultMargin,
-    marginBottom: metrics.defaultMargin,
-    borderRadius:30,
-    backgroundColor:colors.primary,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 11,
-    },
-    shadowOpacity: 0.55,
-    shadowRadius: 14.78,
+    borderRadius:50,
+    borderBottomRightRadius:10,
 
-    elevation: 22,
-
-  },
-  linearGrad:{
-    borderRadius:30,
   },
   imageView: {
-    width: 100,
-    height: 100,
-    alignSelf:'center',
-    // backgroundColor:'white',
+    width: '100%',
+    height: 200,
+    // alignSelf:'center',
+    backgroundColor:'transparent',
     borderRadius:30,
-    marginVertical:15,
+    // marginVertical:15,
     
   },
   image: {
     width: '100%',
     height: '100%',
-    resizeMode:'contain'
+    resizeMode:'cover'
   },
   detailView: {
-    paddingHorizontal: 20,
+    paddingLeft: 30,
     paddingBottom: 20,
-    shadowColor: colors.grey,
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
+    paddingRight: 10,
     borderRadius: 15,
-
-
   },
   iconView: {
-    backgroundColor: 'transparent',
-    borderBottomEndRadius: 15,
-    borderTopStartRadius: 15,
+    backgroundColor: colors.secondary,
+    borderBottomEndRadius: 10,
+    borderTopStartRadius: 10,
     width: 45,
     height: 45,
     alignItems: 'center',
@@ -111,18 +100,19 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     right: 0,
-    shadowColor: colors.secondary,
-    shadowOffset: {
-      width: 2,
-      height: 2,
-    },
-    shadowOpacity: 0.75,
-    shadowRadius: 3.84,
+   margin:5
+  },
+  titleContainer:{
+    // width:'80%'
   },
   title: {
     fontSize: 16,
     fontFamily: fonts.secondaryBold,
-    fontWeight:'bold'
+    paddingHorizontal:25,
+    paddingTop:20,
+    fontSize:20,
+    fontWeight:'bold',
+    color:'white'
   },
   desc: {
     color: colors.grey,
@@ -130,9 +120,8 @@ const styles = StyleSheet.create({
     fontFamily: fonts.secondary,
   },
   price: {
-    marginTop: 10,
-    fontSize: 18,
+    marginTop: 5,
+    fontSize: 20,
     fontFamily: fonts.secondaryBold,
-    fontWeight:'bold'
   },
 });

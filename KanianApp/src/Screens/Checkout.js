@@ -58,7 +58,7 @@ class Checkout extends Component {
         address: this.state.phoneNumber,
         slotdatetime: new Date().toString(),
         email: this.state.email,
-        appname: 'Sushi Midnight',
+        appname: 'Kanian',
         item: JSON.stringify(this.props.cart.items),
       }),
     });
@@ -99,6 +99,7 @@ class Checkout extends Component {
 
         <OrderPlaced
           visible={this.state.visible}
+          // visible={true}
           onPress={() => {
             this.setState({visible: false});
             this.props.emptyCart();
@@ -191,20 +192,25 @@ class Checkout extends Component {
                 multiline={true}
                 inputStyle={{height: 100}}
               />
+            
+        
+            </KeyboardAwareScrollView>
             <TouchableWithoutFeedback
               onPress={() => {
                 this.onButtonPress();
               }}>
-              <View onPress={this.props.onPress} style={[styles.button,{ overflow: 'hidden'}]}>
-                {this.state.loading ? (
-                  <BarIndicator color="white" size={24} />
-                ) : (
-                  <Text style={styles.buttonText} >Checkout</Text>
-                )}
-              </View>
+                <View style={{alignItems:'center'}}>
+                  <View onPress={this.props.onPress} style={[styles.button,{ overflow: 'hidden'}]}>
+                    {this.state.loading ? (
+                      <View style={{paddingVertical:12}}>
+                        <BarIndicator color={colors.secondary} size={24} />
+                      </View>
+                    ) : (
+                      <Text style={styles.buttonText} >Checkout</Text>
+                    )}
+                  </View>
+                </View>
             </TouchableWithoutFeedback>
-        
-            </KeyboardAwareScrollView>
      
       </Wrapper>
     );
@@ -229,7 +235,7 @@ const styles = StyleSheet.create({
     minHeight: 80,
   },
   buttonText: {
-    color: 'white',
+    color: colors.secondary,
     textAlign: 'center',
     fontSize: 18,
     fontFamily: fonts.secondaryBold,
@@ -265,10 +271,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   button: {
-    backgroundColor: colors.secondary,
+    backgroundColor: colors.primary,
     padding: 10,
-    borderRadius: 10,
-
+    borderRadius: 20,
+    margin: metrics.defaultMargin,
+    width:'80%',
   },
 });
 

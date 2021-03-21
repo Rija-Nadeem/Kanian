@@ -9,6 +9,7 @@ import {colors, fonts, metrics, text} from '../utils/Theme';
 import {connect} from 'react-redux';
 import data from '../../data';
 import {ItemCard} from '../Components';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 function SearchScreen(props) {
   const [list, setlist] = useState(data.items);
@@ -23,12 +24,13 @@ function SearchScreen(props) {
 
   return (
     <RootView>
-      <Header title={'Search'}></Header>
-      <SearchBar onChangeText={(value) => setsearchQueryText(value)} />
+      <Header textStyle={{fontWeight:'bold'}} title={'Search Food'}></Header>
+      <SearchBar textInput={{color: colors.secondary}} onChangeText={(value) => setsearchQueryText(value)} />
       <View style={{margin: metrics.defaultMargin}}>
-        <Text>
-          <Text style={{fontFamily: fonts.primary}}>Found </Text>
-          {list.length} Results
+        <Text style={{fontWeight:'bold', color: colors.secondary}}>
+          <Text style={{color: colors.secondary}}>Found </Text>
+          <Text style={{fontSize:18, color: colors.primary}} >{list.length} </Text>
+          Results
         </Text>
       </View>
       <FlatList

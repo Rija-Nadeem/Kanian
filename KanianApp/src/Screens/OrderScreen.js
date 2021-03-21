@@ -35,7 +35,7 @@ class OrderScreen extends Component {
   render() {
     return (
       <Wrapper bottom={0}>
-        <Header textStyle={{fontWeight:'bold'}} title="Your Order" />
+        <Header textStyle={{fontWeight:'bold'}} title="Your Food Items" />
 
         {this.props.cart.items.length > 0 ? (
           <>
@@ -43,6 +43,7 @@ class OrderScreen extends Component {
               bounces={false}
               style={{
                 flex: 1,
+                marginTop: metrics.smallMargin
                 // paddingHorizontal: metrics.defaultMargin,
               }}>
               {this.props.cart.items.map((item) => (
@@ -53,7 +54,7 @@ class OrderScreen extends Component {
                   onMinus={() => this.props.deleteItem(item)}
                 />
               ))}
-              <View style={{marginHorizontal: metrics.defaultMargin}}>
+              <View style={{marginHorizontal: metrics.defaultMargin, marginTop:metrics.largeMargin}}>
                 <View style={styles.info}>
                     <Text style={styles.title}>Delivery Time</Text>
                     <Text style={styles.text}>45 mins</Text>
@@ -65,7 +66,7 @@ class OrderScreen extends Component {
                 <View style={styles.info}>
                     <Text style={styles.title}>Total</Text>
                     <Text style={[styles.title]}>
-                    ${parseInt(this.props.cart.totalPrice) * this.state.quantity}
+                    ${parseInt(this.props.cart.totalPrice) * this.state.quantity}.000
                     </Text>
                 </View>
               </View>
@@ -73,18 +74,11 @@ class OrderScreen extends Component {
             <SafeAreaInsetsContext.Consumer>
               {(insets) => (
                 <TouchableWithoutFeedback
-                  onPress={() => {
-                    Navigator.navigate('Checkout')
-                  }}>
-                  <View
-                    style={[
-                      styles.buttonView,
-                      {paddingBottom: insets.bottom ? insets.bottom : 15},
-                    ]}>
-                        {/* <Text style={styles.buttonText}>
-                          Total Price: $ {this.props.cart.totalPrice}
-                        </Text> */}
-                        <Text style={styles.buttonText}>Place Order</Text>
+                onPress={() =>
+                  Navigator.navigate('Checkout')}
+                >
+                  <View style={{flexDirection:'row', justifyContent:'center'}} >
+                    <Text  style={styles.buttonText}>Confirm Order</Text>
                   </View>
                 </TouchableWithoutFeedback>
               )}
@@ -113,10 +107,16 @@ const styles = StyleSheet.create({
     minHeight: 80,
   },
   buttonText: {
-    color: 'white',
+    color: colors.secondary,
+    marginVertical: metrics.defaultMargin,
     fontSize: 20,
     fontFamily: fonts.primaryBold,
-    fontWeight:'bold',
+    textAlign:'center',
+    padding:10,
+    borderRadius:20,
+    backgroundColor:colors.primary,
+    width:'80%',
+    fontWeight:'bold'
   },
   info: {
     flexDirection: 'row',
