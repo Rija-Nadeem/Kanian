@@ -27,8 +27,8 @@ export default class CartItem extends Component {
             </Text>
             <View style={{flexDirection:'row', justifyContent:'space-between',marginBottom: 5,}}>
                   <View style={{ marginTop: 10, flexDirection:'row'}}>
-                    <Text style={{fontSize:12,paddingRight:2}} >Pp</Text>
-                    <Text style={styles.price}>{price}.000</Text>
+                    {/* <Text style={{fontSize:12,paddingRight:2}} >Pp</Text> */}
+                    <Text style={styles.price}>${price}.00</Text>
                   </View>
                 <View style={styles.quantityView}>
                   <Icon

@@ -43,11 +43,11 @@ export default class FoodCard extends Component {
               {description}
             </Text> */}
             <View style={{flexDirection:'row',}} >
-              <View style={{paddingRight:2}}>
+              {/* <View style={{paddingRight:2}}>
                 <Text style={{fontSize: 12 }}>Pp</Text> 
-              </View>
+              </View> */}
               <Text style={styles.price}>
-                {price.replace('$', '')}.000
+                ${price.replace('$', '')}.00
               </Text>
             </View>
             

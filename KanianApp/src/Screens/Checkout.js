@@ -95,7 +95,7 @@ class Checkout extends Component {
   render() {
     return (
       <Wrapper bottom={0}>
-        <Header textStyle={{fontWeight:'bold'}} title="Customer Details" />
+        <Header textStyle={{fontWeight:'bold'}} title="Personal Details" />
 
         <OrderPlaced
           visible={this.state.visible}
@@ -147,7 +147,7 @@ class Checkout extends Component {
               <Input
                 required
                 placeholder="Email"
-                label="Email"
+                label="Email Address"
                 keyboardType={'email-address'}
                 textValue={this.state.email}
                 returnKeyType="next"
@@ -164,7 +164,7 @@ class Checkout extends Component {
               <Input
                 required
                 placeholder="Mobile Number"
-                label="Mobile No."
+                label="Phone No."
                 textValue={this.state.phoneNumber}
                 returnKeyType="next"
                 onRef={(ref) => {
@@ -181,7 +181,7 @@ class Checkout extends Component {
               <Input
                 required
                 placeholder="Address"
-                label="Address"
+                label="Delivery Address"
                 textValue={this.state.address}
                 onRef={(ref) => {
                   this.inputs['address'] = ref;
@@ -206,7 +206,7 @@ class Checkout extends Component {
                         <BarIndicator color={colors.secondary} size={24} />
                       </View>
                     ) : (
-                      <Text style={styles.buttonText} >Checkout</Text>
+                      <Text style={styles.buttonText} >Place Order!</Text>
                     )}
                   </View>
                 </View>

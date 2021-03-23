@@ -14,6 +14,7 @@ import {
   SafeAreaInsetsContext,
 } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/Ionicons';
+import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
 import Navigator from '../utils/Navigator';
 import data from '../../data';
 import {connect} from 'react-redux';
@@ -47,19 +48,40 @@ class ProductDetail extends Component {
     const quantity = flag.length !== 0 ? flag[0].quantity : 0;
 
     return (
-      <Wrapper top={0} bottom={0} style={{backgroundColor: bgcolor}}>
-        <View style={styles.imageView}>
-          <Image style={styles.image} source={image} />
-        </View>
-        <TouchableWithoutFeedback onPress={() => Navigator.goBack()}>
-          <View style={styles.backIcon}>
-            <Icon name="chevron-back" color="black" size={30} />
+      <View style={styles.wrapper}>
+        <View style={styles.topContent}>
+          <View style={styles.topIcons}>
+          <TouchableWithoutFeedback onPress={() => Navigator.goBack()}>
+            <View style={styles.backIcon} >
+              <Icon name="chevron-back" color={colors.background} size={30} />
+            </View>
+            </TouchableWithoutFeedback>
+            <TouchableWithoutFeedback onPress={() => Navigator.navigate('Order')}>
+              <View style={styles.iconCart} >
+                <Icon2 name="cart"  color={colors.background} size={30} />
+              </View>
+            </TouchableWithoutFeedback>
           </View>
-        </TouchableWithoutFeedback>
-        <View style={{paddingHorizontal: metrics.defaultMargin}}>
-          <Text style={styles.heading}>{name}</Text>
-          <Text style={styles.smallHeading}>Description:</Text>
-          <Text style={styles.text}>{description}</Text>
+          <View style={styles.productDetail}>
+            <Text style={styles.heading}>{name}</Text>
+            <View style={styles.imageContainer}>
+              <Image style={styles.image} source={image} />
+              <View style={styles.price}>
+                <View style={{flexDirection:'row', justifyContent:'center'}}>
+                  {/* <Text style={{fontSize:12,paddingRight:2}} >Pp</Text> */}
+                  <Text style={styles.priceText}>${price.replace('$', '')}.00</Text>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+        <View style={styles.bottomContent}>
+          <View style={styles.productDescription}>
+            <Text style={styles.smallHeading}>Description:</Text>
+            <Text style={styles.text}>{description}</Text>
+          </View>
+        </View>
+        <View style={styles.bottomBtnsCont}>
           <View style={styles.quantityView}>
             <TouchableOpacity
               activeOpacity={0.8}
@@ -67,7 +89,7 @@ class ProductDetail extends Component {
               style={styles.iconView}>
               <Icon name="remove" style={{...styles.icon}} />
             </TouchableOpacity>
-            <Text style={styles.quantity}>{quantity}</Text>
+              <Text style={styles.quantity}>{quantity}</Text>
             <TouchableOpacity
               activeOpacity={0.8}
               onPress={this.addItem}
@@ -75,43 +97,98 @@ class ProductDetail extends Component {
               <Icon name="add" style={styles.icon} />
             </TouchableOpacity>
           </View>
+          <TouchableWithoutFeedback  onPress={()=>Navigator.navigate('Order')}>
+            <View style={styles.buyNowCont} >
+             <Text style={styles.buyNowText}>Buy Now</Text>
+            </View>
+          </TouchableWithoutFeedback>
         </View>
-            <TouchableWithoutFeedback
-              // onPress={() =>
-              //   Navigator.navigate('Checkout', {
-              //     item: this.props.route.params.item,
-              //   })}
-              onPress={() =>
-                Navigator.navigate('Order')}
-              >
-              <View
-                style={[
-                  styles.buttonView,
-                  {paddingBottom:30},
-                ]}>
-                <Text style={styles.buttonText}>
-                  Price: $ {price.replace('$', '')}
-                </Text>
-                <Text style={styles.buttonText}>Go to Cart</Text>
-              </View>
-            </TouchableWithoutFeedback>
-      </Wrapper>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  wrapper: {
+    flexDirection: 'column',
+    height: '100%',
+    width: '100%',
+    backgroundColor: colors.primary
+  },
+  topContent: {
+    height: '50%',
+    width: '100%',
+    marginBottom: 30,
+  },
+  bottomContent: {
+    height: '50%',
+    width: '100%',
+    backgroundColor: colors.background,
+    borderTopLeftRadius: 60,
+    borderTopRightRadius: 60,
+  },
+  topIcons: {
+    top: 25,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 5,
+    marginBottom: metrics.largeMargin
+  },
+  backIcon: {
+    // backgroundColor: 'red',
+    width: 50,
+    height: 50,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  iconCart: {
+    // backgroundColor: colors.background,
+    width: 50,
+    height: 50,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  productDetail: {
+    paddingHorizontal: 20,
+    marginBottom: 25,
+    fontSize: 32,
+  },
+  imageContainer: {
+    flexDirection: 'row',
+    width: '100%',
+    height: '70%',
+    justifyContent: 'space-between',
+    flexWrap: 'wrap',
+    alignItems: 'center'
+    
+  },
   image: {
-    width: metrics.width,
-    height: '90%',
+    width: '60%',
+    height: '100%',
     resizeMode: 'contain',
   },
-  heading: {
+  price: {
+    backgroundColor: colors.background,
+    borderRadius: 15,
+    height: 50,
+    width: 130,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  priceText: {
     fontFamily: fonts.secondaryBold,
-    fontSize: 28,
-    marginBottom: metrics.defaultMargin,
+    fontWeight: 'bold',
+    fontSize: 18,
     color: colors.secondary,
-    fontWeight:'bold'
+  },
+  heading: {
+    fontFamily: fonts.primaryBold,
+    fontSize: 28,
+    color: colors.background,
+    fontWeight:'bold',
+    textTransform: 'uppercase'
   },
   smallHeading: {
     fontFamily: fonts.primaryBold,
@@ -130,6 +207,19 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-end',
   },
+  productDescription: {
+    margin: 35,
+  },
+  bottomBtnsCont: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    position: 'absolute',
+    bottom:0,
+    // backgroundColor:'red',
+    left: metrics.smallMargin,
+    paddingHorizontal: metrics.defaultMargin,
+    flex:1
+  },
   buttonView: {
     backgroundColor: colors.secondary,
     flexDirection: 'row',
@@ -137,7 +227,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     borderTopStartRadius: 30,
     paddingHorizontal: 30,
-    marginLeft: metrics.defaultMargin,
+    // marginLeft: metrics.defaultMargin,
   },
   buttonText: {
     color: 'white',
@@ -145,28 +235,41 @@ const styles = StyleSheet.create({
     fontFamily: fonts.primaryBold,
     fontWeight:'bold'
   },
-  backIcon: {
-    position: 'absolute',
-    top: 50,
-    left: metrics.defaultMargin,
-    backgroundColor: colors.background,
-    width: 50,
-    height: 50,
-    borderRadius: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
   quantityView: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: metrics.defaultMargin,
+    backgroundColor: colors.primary,
+    padding: 10,
+   borderRadius:20,
+    width: '40%',
+    justifyContent: 'space-between'
+  },
+  buyNowCont: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: metrics.defaultMargin,
+    backgroundColor: colors.primary,
+    // paddingHorizontal: 10,
+    // paddingVertical:5,
+    borderRadius:20,
+    width: '55%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  buyNowText: {
+    fontFamily: fonts.primaryBold,
+    fontSize: 20,
+    color: colors.background,
+    backgroundColor: colors.primary,
+    fontWeight:'bold',
+    textTransform: 'capitalize',
   },
   iconView: {
-    width: 40,
-    height: 40,
-    borderRadius: 5,
-    backgroundColor: colors.secondary,
+    width: 30,
+    height: 30,
+    borderRadius: 100,
+    backgroundColor: colors.grey,
     alignItems: 'center',
     justifyContent: 'center',
   },

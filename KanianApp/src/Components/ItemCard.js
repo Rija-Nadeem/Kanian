@@ -33,8 +33,8 @@ export default class ItemCard extends Component {
                 <View style={{flex: 1}}>
                   <Text numberOfLines={1} ellipsizeMode="tail" style={styles.title}>{name}</Text>
                   <View style={{ marginTop: 10, flexDirection:'row'}}>
-                    <Text style={{fontSize:12,paddingRight:2}} >Pp</Text>
-                    <Text style={styles.price}>{price}.000</Text>
+                    {/* <Text style={{fontSize:12,paddingRight:2}} >Pp</Text> */}
+                    <Text style={styles.price}>${price}.00</Text>
                   </View>
                 </View>
                 <View style={styles.iconView}>
